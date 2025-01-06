@@ -1,6 +1,13 @@
 common --enable_bzlmod
 common --enable_platform_specific_config
 
+build --repo_env=CPLUS_INCLUDE_PATH=/work-dir/projects/eggless-omelette/bazel-vcpkg/vcpkg_installed/x64-linux/include
+build --repo_env=LIBRARY_PATH=/work-dir/projects/eggless-omelette/bazel-vcpkg/vcpkg_installed/x64-linux/lib
+# build --repo_env=CPLUS_INCLUDE_PATH=./vcpkg_installed/x64-linux/include
+# build --repo_env=LIBRARY_PATH=.vcpkg_installed/x64-linux/lib
+# CPLUS_INCLUDE_PATH=$(realpath vcpkg_installed/x64-linux/include)
+# LIBRARY_PATH=$(realpath vcpkg_installed/x64-linux/lib)
+
 build --repo_env=CC=clang
 # build --repo_env=CC=gcc
 
@@ -10,7 +17,12 @@ build --host_cxxopt=-std=c++20
 
 build --define=use_fast_cpp_protos=true
 
+# build:linux --incompatible_disallow_empty_glob=false
 build:linux --noincompatible_disallow_ctx_resolve_tools
+
+# build:linux --cxxopt=-Ivcpkg_installed/x64-linux/include
+# build:linux --linkopt=-Lvcpkg_installed/x64-linux/lib
+build:linux --linkopt=-pthread
 
 # `error: aligned deallocation function of type xxx is only available on macOS 10.13 or newer`
 build:macos --cxxopt=-fno-aligned-allocation

@@ -2,6 +2,7 @@
 
 ```bash
 vcpkg --disable-metrics install --recurse
+# vcpkg --disable-metrics install --recurse --triplet=x64-linux-dynamic
 ```
 
 ## update vcpkg baseline

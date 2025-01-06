@@ -1,13 +1,21 @@
-PKG_CONFIG_PATH = ./vcpkg_installed/x64-linux/lib/pkgconfig
+ifeq ($(shell uname),Linux)
+	VCPKG_INSTALLED = ./vcpkg_installed/x64-linux
+endif
+
+ifeq ($(shell uname),Darwin)
+	VCPKG_INSTALLED = ./vcpkg_installed/arm64-osx
+endif
+
+PKG_CONFIG_PATH = $(VCPKG_INSTALLED)/lib/pkgconfig
 ALL_PKG := $(shell ls $(PKG_CONFIG_PATH) | cut -d . -f 1)
 PKG_CONFIG = PKG_CONFIG_PATH=$(PKG_CONFIG_PATH) pkg-config
-PKG_FLAGS := $(shell $(PKG_CONFIG) --cflags --libs $(ALL_PKG)) -isystem ./vcpkg_installed/x64-linux/include
+PKG_FLAGS := $(shell $(PKG_CONFIG) --cflags --libs $(ALL_PKG)) -isystem $(VCPKG_INSTALLED)/include
 
 CC = clang++
 CC_FLAGS = $(PKG_FLAGS) -pedantic -Wall -Wextra -std=c++20 -pthread -static -Wl,--as-needed
 
-PROTOC = ./vcpkg_installed/x64-linux/tools/protobuf/protoc
-GRPC_CC_PLUGIN = ./vcpkg_installed/x64-linux/tools/grpc/grpc_cpp_plugin
+PROTOC = $(VCPKG_INSTALLED)/tools/protobuf/protoc
+GRPC_CC_PLUGIN = $(VCPKG_INSTALLED)/tools/grpc/grpc_cpp_plugin
 PROTO_PATH = ./protos
 
 OUT_PATH = ./build

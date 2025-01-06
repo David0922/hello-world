@@ -30,7 +30,8 @@ filter_files = rule(
 )
 
 # buildifier: disable=function-docstring
-def cc_grpc(name, protos, visibility, deps):
+# def cc_grpc(name, protos, visibility, deps):
+def cc_grpc(name, protos, visibility):
     name_pb = name + "_pb"
     name_srcs = name_pb + "_srcs"
     name_hdrs = name_pb + "_hdrs"
@@ -58,5 +59,5 @@ def cc_grpc(name, protos, visibility, deps):
         hdrs = [name_hdrs],
         includes = [name_pb],
         visibility = visibility,
-        deps = deps,
+        # deps = deps,
     )
