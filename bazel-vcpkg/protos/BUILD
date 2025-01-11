@@ -1,29 +1,29 @@
-# load("@rules_proto//proto:defs.bzl", "proto_library")
-# load("//:cc_grpc.bzl", "cc_grpc")
+# # load("@rules_proto//proto:defs.bzl", "proto_library")
+# # load("//:cc_grpc.bzl", "cc_grpc")
 
-# proto_library(
-#     name = "calc_proto",
-#     srcs = ["calculator.proto"],
-#     visibility = ["//visibility:public"],
-# )
+# # proto_library(
+# #     name = "calc_proto",
+# #     srcs = ["calculator.proto"],
+# #     visibility = ["//visibility:public"],
+# # )
 
-# # cpp_grpc_library(
+# # # cpp_grpc_library(
+# # #     name = "calc_cc_grpc",
+# # #     protos = [":calc_proto"],
+# # #     visibility = ["//visibility:public"],
+# # #     deps = ["//:vcpkg"],
+# # # )
+
+# # cc_grpc(
 # #     name = "calc_cc_grpc",
 # #     protos = [":calc_proto"],
 # #     visibility = ["//visibility:public"],
 # #     deps = ["//:vcpkg"],
 # # )
 
-# cc_grpc(
+# cc_library(
 #     name = "calc_cc_grpc",
-#     protos = [":calc_proto"],
+#     srcs = glob(["*.cc"]),
+#     hdrs = glob(["*.h"]),
 #     visibility = ["//visibility:public"],
-#     deps = ["//:vcpkg"],
 # )
-
-cc_library(
-    name = "calc_cc_grpc",
-    srcs = glob(["*.cc"]),
-    hdrs = glob(["*.h"]),
-    visibility = ["//visibility:public"],
-)

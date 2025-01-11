@@ -1,3 +1,5 @@
+load("//:vcpkg.bzl", "vcpkg")
+
 # cc_library(
 #     name = "vcpkg",
 #     srcs = select({
@@ -20,3 +22,11 @@
 #     linkstatic = True,
 #     visibility = ["//visibility:public"],
 # )
+
+vcpkg(
+    name = "vcpkg",
+    srcs = glob(["vcpkg_installed/x64-linux/lib/**/*.a"]),
+    hdrs = glob(["vcpkg_installed/x64-linux/include/**"]),
+    includes = ["vcpkg_installed/x64-linux/include"],
+    vcpkg_installed = "vcpkg_installed/x64-linux",
+)

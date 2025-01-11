@@ -5,7 +5,7 @@ cc_binary(
     # linkopts = ["-static"],
     # linkshared = True,
     deps = [
-        # "//:vcpkg",
-        "//protos:calc_cc_grpc",
+        "//:vcpkg",
+        # "//protos:calc_cc_grpc",
     ],
 )
